@@ -37,3 +37,9 @@ lerna-debug.log*
 
 # TODO list
 todo
+
+#database
+db.db
+
+#diagrams
+animedatabese_diagram.drawio
