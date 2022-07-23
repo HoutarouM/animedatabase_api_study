@@ -1,13 +1,13 @@
 import { Controller, Get } from '@nestjs/common';
 import { AnimeService } from './anime.service';
-import AnimeEntity from './entity/anime.entity';
+import Anime from './entity/anime.entity';
 
 @Controller('anime')
 export class AnimeController {
   constructor(private animeService: AnimeService) {}
 
   @Get()
-  findAll(): Promise<AnimeEntity[]> {
+  findAll(): Promise<Anime[]> {
     return this.animeService.findAll();
   }
 }
