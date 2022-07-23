@@ -5,7 +5,10 @@ import {
   ManyToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+
+// entities
 import Type from './type.entity';
+import Producer from './producer.entity';
 
 @Entity()
 export default class Anime {
@@ -34,8 +37,8 @@ export default class Anime {
   @Column()
   aired_to: Date;
 
-  //   TODO: change to relationships
-  @Column()
+  @ManyToMany(() => Producer)
+  @JoinTable()
   produces: number;
 
   @Column()
