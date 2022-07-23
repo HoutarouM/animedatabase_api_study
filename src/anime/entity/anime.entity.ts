@@ -10,6 +10,7 @@ import {
 import Type from './type.entity';
 import Producer from './producer.entity';
 import Licensor from './licensor.entity';
+import Studio from './studio.entity';
 
 @Entity()
 export default class Anime {
@@ -40,19 +41,19 @@ export default class Anime {
 
   @ManyToMany(() => Producer)
   @JoinTable()
-  produces: Producer[];
+  producers: Producer[];
 
   @ManyToMany(() => Licensor)
   @JoinTable()
   licensors: Licensor[];
 
-  @Column()
-  studios: number;
+  @ManyToMany(() => Studio)
+  @JoinTable()
+  studios: Studio[];
 
   @Column()
   source: string;
 
-  //   TODO: change to relationships
   @Column()
-  genres_id: number;
+  genres: number;
 }
