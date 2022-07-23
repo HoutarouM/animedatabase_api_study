@@ -11,6 +11,7 @@ import Type from './type.entity';
 import Producer from './producer.entity';
 import Licensor from './licensor.entity';
 import Studio from './studio.entity';
+import Genre from './genre.entity';
 
 @Entity()
 export default class Anime {
@@ -54,6 +55,6 @@ export default class Anime {
   @Column()
   source: string;
 
-  @Column()
-  genres: number;
+  @ManyToMany(() => Genre)
+  genres: Genre[];
 }
