@@ -1,16 +1,18 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import AnimeEntity from './entity/anime.entity';
+import Anime from './entity/anime.entity';
 
 @Injectable()
 export class AnimeService {
   constructor(
-    @InjectRepository(AnimeEntity)
-    private animeRepository: Repository<AnimeEntity>,
+    @InjectRepository(Anime)
+    private animeRepository: Repository<Anime>,
   ) {}
 
-  async findAll(): Promise<AnimeEntity[]> {
-    return await this.animeRepository.find();
+  async findAll(): Promise<Anime[]> {
+    return await this.animeRepository.find({
+      relations: ['types', 'producers', 'licensors', 'studios', 'genres'],
+    });
   }
 }
