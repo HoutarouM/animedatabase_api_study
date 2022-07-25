@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param, ParseIntPipe } from '@nestjs/common';
 import { AnimeService } from './anime.service';
 import Anime from './entity/anime.entity';
 
@@ -7,7 +7,12 @@ export class AnimeController {
   constructor(private animeService: AnimeService) {}
 
   @Get()
-  findAll(): Promise<Anime[]> {
+  async findAll(): Promise<Anime[]> {
     return this.animeService.findAll();
+  }
+
+  @Get(':id')
+  async findById(@Param('id', ParseIntPipe) id: number): Promise<Anime> {
+    return this.animeService.findById(id);
   }
 }

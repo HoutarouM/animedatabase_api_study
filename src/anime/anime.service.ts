@@ -15,4 +15,16 @@ export class AnimeService {
       relations: ['types', 'producers', 'licensors', 'studios', 'genres'],
     });
   }
+
+  async findById(id: number): Promise<Anime> {
+    try {
+      const result = await this.animeRepository.findOneOrFail({
+        where: { id },
+      });
+
+      return result;
+    } catch (err) {
+      throw err;
+    }
+  }
 }
