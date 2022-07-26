@@ -73,4 +73,17 @@ export class AnimeService {
     // save anime
     return await this.animeRepository.save(anime);
   }
+
+  /**
+   * Find an anime by id, remove it, and return the data about them
+   * @param {number} id - number - the id of the anime to be deleted
+   * @returns The anime that was deleted.
+   */
+  async deleteAnime(id: number): Promise<Anime> {
+    // find anime by id
+    const anime = await this.findById(id);
+
+    // remove anime and return data
+    return this.animeRepository.remove(anime);
+  }
 }

@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   ParseIntPipe,
@@ -37,5 +38,10 @@ export class AnimeController {
     @Body() editAnimeDto: EditAnimeDto,
   ): Promise<Anime> {
     return await this.animeService.updateAnimeData(id, editAnimeDto);
+  }
+
+  @Delete(':id')
+  async deleteAnime(@Param('id', ParseIntPipe) id: number): Promise<Anime> {
+    return await this.animeService.deleteAnime(id);
   }
 }
