@@ -21,8 +21,8 @@ export default class Anime {
   @Column()
   title: string;
 
-  @Column()
-  alternative_title: string;
+  @Column({ nullable: true })
+  alternative_title?: string;
 
   @Column()
   japanese_title: string;
@@ -34,11 +34,11 @@ export default class Anime {
   @Column()
   episodes: number;
 
-  @Column()
-  aired_from: Date;
+  @Column({ nullable: true })
+  aired_from?: Date;
 
-  @Column()
-  aired_to: Date;
+  @Column({ nullable: true })
+  aired_to?: Date;
 
   @ManyToMany(() => Producer)
   @JoinTable()
