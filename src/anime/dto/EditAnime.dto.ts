@@ -5,12 +5,12 @@ import Producer from '../entity/producer.entity';
 import Studio from '../entity/studio.entity';
 import Type from '../entity/type.entity';
 
-export default class AddAnimeDto {
+export default class EditAnimeDto {
   @ApiProperty()
   title: string;
 
   @ApiProperty()
-  alternative_title?: string;
+  alternative_title: string;
 
   @ApiProperty()
   japanese_title: string;
@@ -19,7 +19,7 @@ export default class AddAnimeDto {
   types: Type[];
 
   @ApiProperty()
-  episodes?: number;
+  episodes: number;
 
   @ApiProperty()
   aired_from?: Date;

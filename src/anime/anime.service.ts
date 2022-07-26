@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import AddAnimeDto from './dto/AddAnime.dto';
+import EditAnimeDto from './dto/EditAnime.dto';
 import Anime from './entity/anime.entity';
 
 @Injectable()
@@ -48,6 +49,26 @@ export class AnimeService {
   async addAnime(addAnimeDto: AddAnimeDto): Promise<Anime> {
     // get anime data
     const anime = await this.animeRepository.create(addAnimeDto);
+
+    // save anime
+    return await this.animeRepository.save(anime);
+  }
+
+  /**
+   * It gets an anime by id, changes the data, and saves the anime
+   * @param {number} id - number - the id of the anime to be updated
+   * @param {EditAnimeDto} editAnimeDto - AddAnimeDto
+   * @returns The updated anime data.
+   */
+  async updateAnimeData(
+    id: number,
+    editAnimeDto: EditAnimeDto,
+  ): Promise<Anime> {
+    // get anime data by id
+    let anime = await this.findById(id);
+
+    // change data
+    anime = { id, ...editAnimeDto };
 
     // save anime
     return await this.animeRepository.save(anime);

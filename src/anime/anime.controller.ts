@@ -5,9 +5,11 @@ import {
   Param,
   ParseIntPipe,
   Post,
+  Put,
 } from '@nestjs/common';
 import { AnimeService } from './anime.service';
 import AddAnimeDto from './dto/AddAnime.dto';
+import EditAnimeDto from './dto/EditAnime.dto';
 import Anime from './entity/anime.entity';
 
 @Controller('anime')
@@ -27,5 +29,13 @@ export class AnimeController {
   @Post()
   async addAnime(@Body() addAnimeDto: AddAnimeDto): Promise<Anime> {
     return this.animeService.addAnime(addAnimeDto);
+  }
+
+  @Put(':id')
+  async updateAnimeData(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() editAnimeDto: EditAnimeDto,
+  ): Promise<Anime> {
+    return await this.animeService.updateAnimeData(id, editAnimeDto);
   }
 }

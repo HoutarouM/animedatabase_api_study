@@ -31,7 +31,7 @@ export default class Anime {
   @JoinTable()
   types: Type[];
 
-  @Column()
+  @Column({ nullable: true })
   episodes: number;
 
   @Column({ nullable: true })
