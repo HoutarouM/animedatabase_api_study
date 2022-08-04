@@ -19,9 +19,13 @@ export class AnimeService {
    * @returns An array of Anime objects.
    */
   async findAll(): Promise<Anime[]> {
-    return await this.animeRepository.find({
-      relations: ['types', 'producers', 'licensors', 'studios', 'genres'],
-    });
+    try {
+      return await this.animeRepository.find({
+        relations: ['types', 'producers', 'licensors', 'studios', 'genres'],
+      });
+    } catch (err) {
+      throw err;
+    }
   }
 
   /**
@@ -31,11 +35,9 @@ export class AnimeService {
    */
   async findById(id: number): Promise<Anime> {
     try {
-      const result = await this.animeRepository.findOneOrFail({
+      return await this.animeRepository.findOneOrFail({
         where: { id },
       });
-
-      return result;
     } catch (err) {
       throw err;
     }
@@ -47,11 +49,15 @@ export class AnimeService {
    * @returns The anime object
    */
   async addAnime(addAnimeDto: AddAnimeDto): Promise<Anime> {
-    // get anime data
-    const anime = await this.animeRepository.create(addAnimeDto);
+    try {
+      // get anime data
+      const anime = await this.animeRepository.create(addAnimeDto);
 
-    // save anime
-    return await this.animeRepository.save(anime);
+      // save anime
+      return await this.animeRepository.save(anime);
+    } catch (err) {
+      throw err;
+    }
   }
 
   /**
@@ -64,14 +70,18 @@ export class AnimeService {
     id: number,
     editAnimeDto: EditAnimeDto,
   ): Promise<Anime> {
-    // get anime data by id
-    let anime = await this.findById(id);
+    try {
+      // get anime data by id
+      let anime = await this.findById(id);
 
-    // change data
-    anime = { id, ...editAnimeDto };
+      // change data
+      anime = { id, ...editAnimeDto };
 
-    // save anime
-    return await this.animeRepository.save(anime);
+      // save anime
+      return await this.animeRepository.save(anime);
+    } catch (err) {
+      throw err;
+    }
   }
 
   /**
@@ -80,10 +90,14 @@ export class AnimeService {
    * @returns The anime that was deleted.
    */
   async deleteAnime(id: number): Promise<Anime> {
-    // find anime by id
-    const anime = await this.findById(id);
+    try {
+      // find anime by id
+      const anime = await this.findById(id);
 
-    // remove anime and return data
-    return this.animeRepository.remove(anime);
+      // remove anime and return data
+      return this.animeRepository.remove(anime);
+    } catch (err) {
+      throw err;
+    }
   }
 }

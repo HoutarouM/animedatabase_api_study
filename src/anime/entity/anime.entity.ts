@@ -32,7 +32,10 @@ export default class Anime {
   types: Type[];
 
   @Column({ nullable: true })
-  episodes: number;
+  episodes?: number;
+
+  @Column({ nullable: true })
+  duration?: number;
 
   @Column({ nullable: true })
   aired_from?: Date;
