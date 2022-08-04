@@ -1,4 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
+
+// entities
 import Genre from '../entity/genre.entity';
 import Licensor from '../entity/licensor.entity';
 import Producer from '../entity/producer.entity';
@@ -102,4 +104,12 @@ export default class AddAnimeDto {
     nullable: false,
   })
   genres: Genre[];
+
+  @ApiProperty({
+    description: 'Title description.',
+    type: String,
+    nullable: true,
+    required: false,
+  })
+  description?: string;
 }

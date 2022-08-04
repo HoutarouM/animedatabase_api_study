@@ -8,10 +8,16 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
+
+// entities
+import Anime from './entity/anime.entity';
+
+// services
 import { AnimeService } from './anime.service';
+
+// dtos
 import AddAnimeDto from './dto/AddAnime.dto';
 import EditAnimeDto from './dto/EditAnime.dto';
-import Anime from './entity/anime.entity';
 
 @Controller('anime')
 export class AnimeController {
@@ -19,17 +25,17 @@ export class AnimeController {
 
   @Get()
   async findAll(): Promise<Anime[]> {
-    return this.animeService.findAll();
+    return await this.animeService.findAll();
   }
 
   @Get(':id')
   async findById(@Param('id', ParseIntPipe) id: number): Promise<Anime> {
-    return this.animeService.findById(id);
+    return await this.animeService.findById(id);
   }
 
   @Post()
   async addAnime(@Body() addAnimeDto: AddAnimeDto): Promise<Anime> {
-    return this.animeService.addAnime(addAnimeDto);
+    return await this.animeService.addAnime(addAnimeDto);
   }
 
   @Put(':id')

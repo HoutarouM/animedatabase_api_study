@@ -1,9 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+
+// entities
+import Anime from './entity/anime.entity';
+
+// dtos
 import AddAnimeDto from './dto/AddAnime.dto';
 import EditAnimeDto from './dto/EditAnime.dto';
-import Anime from './entity/anime.entity';
 
 @Injectable()
 export class AnimeService {

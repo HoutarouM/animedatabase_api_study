@@ -61,4 +61,7 @@ export default class Anime {
   @ManyToMany(() => Genre)
   @JoinTable()
   genres: Genre[];
+
+  @Column({ nullable: true })
+  description?: string;
 }
