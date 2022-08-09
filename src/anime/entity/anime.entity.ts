@@ -27,6 +27,9 @@ export default class Anime {
   @Column()
   japanese_title: string;
 
+  @Column({ nullable: true })
+  poster_path?: string;
+
   @ManyToMany(() => Type)
   @JoinTable()
   types: Type[];

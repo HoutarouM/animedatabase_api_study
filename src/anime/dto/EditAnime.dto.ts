@@ -31,6 +31,14 @@ export default class EditAnimeDto {
   japanese_title: string;
 
   @ApiProperty({
+    description: 'Path to the anime poster image.',
+    type: String,
+    nullable: true,
+    required: false,
+  })
+  poster_path?: string;
+
+  @ApiProperty({
     description: 'Anime type np. TV series, Film and so on.',
     type: [Type],
     required: false,
