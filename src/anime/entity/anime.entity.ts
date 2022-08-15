@@ -3,6 +3,7 @@ import {
   Entity,
   JoinTable,
   ManyToMany,
+  ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
@@ -30,9 +31,8 @@ export default class Anime {
   @Column({ nullable: true })
   poster_path?: string;
 
-  @ManyToMany(() => Type)
-  @JoinTable()
-  types: Type[];
+  @ManyToOne(() => Type, (type) => type.type)
+  type: Type;
 
   @Column({ nullable: true })
   episodes?: number;

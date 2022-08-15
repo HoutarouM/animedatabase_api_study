@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import Anime from './anime.entity';
 
 @Entity()
 export default class Type {
@@ -7,4 +8,7 @@ export default class Type {
 
   @Column()
   type: string;
+
+  @OneToMany(() => Anime, (anime) => anime.type)
+  animes: Anime[];
 }

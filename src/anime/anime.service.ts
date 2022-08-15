@@ -25,7 +25,7 @@ export class AnimeService {
   async findAll(): Promise<Anime[]> {
     try {
       return await this.animeRepository.find({
-        relations: ['types', 'producers', 'licensors', 'studios', 'genres'],
+        relations: ['type', 'producers', 'licensors', 'studios', 'genres'],
       });
     } catch (err) {
       throw err;

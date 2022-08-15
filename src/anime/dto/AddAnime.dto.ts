@@ -32,10 +32,10 @@ export default class AddAnimeDto {
 
   @ApiProperty({
     description: 'Anime type np. TV series, Film and so on.',
-    type: [Type],
+    type: Type,
     nullable: false,
   })
-  types: Type[];
+  type: Type;
 
   @ApiProperty({
     description: 'Count of episodes',
