@@ -84,7 +84,7 @@ export class AnimeController {
     const animeData: EditAnimeDto = new EditAnimeDto();
 
     // save poster path
-    animeData.poster_path = '/poster/' + file.filename;
+    animeData.poster_path = '/posters/' + file.filename;
 
     // update data
     return await this.updateAnimeData(id, animeData);
