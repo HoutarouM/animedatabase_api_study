@@ -12,14 +12,15 @@ import {
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { diskStorage } from 'multer';
-import { extname } from 'path';
 
 // entities
 import Anime from './entity/anime.entity';
 
 // services
 import { AnimeService } from './anime.service';
+
+// image settings
+import { posterSettings } from './poster.image';
 
 // dtos
 import AddAnimeDto from './dto/AddAnime.dto';
@@ -55,26 +56,7 @@ export class AnimeController {
 
   // TODO: refactor filename
   @Put(':id/upload/poster')
-  @UseInterceptors(
-    FileInterceptor('file', {
-      storage: diskStorage({
-        destination: './uploads/posters',
-        filename: (req, file, cb) => {
-          // generate unique id
-          const uniqueId = Date.now();
-
-          // get file extension name
-          const ext = extname(file.originalname);
-
-          // create filename with unique id and original extension
-          const filename = `${uniqueId}${ext}`;
-
-          // return filename with callback
-          cb(null, filename);
-        },
-      }),
-    }),
-  )
+  @UseInterceptors(FileInterceptor('file', posterSettings))
   async uploadAnimePoster(
     @Param('id', ParseIntPipe) id: number,
     @UploadedFile()
