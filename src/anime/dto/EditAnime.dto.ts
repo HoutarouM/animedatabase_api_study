@@ -1,4 +1,14 @@
 import { ApiProperty } from '@nestjs/swagger';
+import {
+  IsArray,
+  IsDate,
+  IsInt,
+  IsNotEmpty,
+  IsObject,
+  IsOptional,
+  IsString,
+  Length,
+} from 'class-validator';
 
 // entities
 import Genre from '../entity/genre.entity';
@@ -14,6 +24,10 @@ export default class EditAnimeDto {
     nullable: false,
     required: false,
   })
+  @IsString()
+  @IsNotEmpty()
+  @Length(10, 50)
+  @IsOptional()
   title: string;
 
   @ApiProperty({
@@ -21,6 +35,10 @@ export default class EditAnimeDto {
     type: String,
     required: false,
   })
+  @IsString()
+  @IsNotEmpty()
+  @Length(10, 50)
+  @IsOptional()
   alternative_title: string;
 
   @ApiProperty({
@@ -28,6 +46,10 @@ export default class EditAnimeDto {
     type: String,
     required: false,
   })
+  @IsString()
+  @IsNotEmpty()
+  @Length(10, 50)
+  @IsOptional()
   japanese_title: string;
 
   @ApiProperty({
@@ -36,6 +58,9 @@ export default class EditAnimeDto {
     nullable: true,
     required: false,
   })
+  @IsString()
+  @IsNotEmpty()
+  @IsOptional()
   poster_path?: string;
 
   @ApiProperty({
@@ -43,6 +68,8 @@ export default class EditAnimeDto {
     type: Type,
     required: false,
   })
+  @IsObject()
+  @IsOptional()
   type: Type;
 
   @ApiProperty({
@@ -50,6 +77,8 @@ export default class EditAnimeDto {
     type: Number,
     required: false,
   })
+  @IsInt()
+  @IsOptional()
   episodes?: number;
 
   @ApiProperty({
@@ -57,6 +86,8 @@ export default class EditAnimeDto {
     type: Number,
     required: false,
   })
+  @IsInt()
+  @IsOptional()
   duration?: number;
 
   @ApiProperty({
@@ -65,6 +96,8 @@ export default class EditAnimeDto {
     nullable: true,
     required: false,
   })
+  @IsDate()
+  @IsOptional()
   aired_from?: Date;
 
   @ApiProperty({
@@ -73,6 +106,8 @@ export default class EditAnimeDto {
     nullable: true,
     required: false,
   })
+  @IsDate()
+  @IsOptional()
   aired_to?: Date;
 
   @ApiProperty({
@@ -80,6 +115,8 @@ export default class EditAnimeDto {
     type: [Producer],
     required: false,
   })
+  @IsArray()
+  @IsOptional()
   producers: Producer[];
 
   @ApiProperty({
@@ -87,6 +124,8 @@ export default class EditAnimeDto {
     type: [Licensor],
     required: false,
   })
+  @IsArray()
+  @IsOptional()
   licensors: Licensor[];
 
   @ApiProperty({
@@ -94,6 +133,8 @@ export default class EditAnimeDto {
     type: [Studio],
     required: false,
   })
+  @IsArray()
+  @IsOptional()
   studios: Studio[];
 
   @ApiProperty({
@@ -102,6 +143,8 @@ export default class EditAnimeDto {
     required: false,
     enum: ['Manga', 'Original'],
   })
+  @IsString()
+  @IsOptional()
   source: string;
 
   @ApiProperty({
@@ -109,6 +152,8 @@ export default class EditAnimeDto {
     type: [Genre],
     required: false,
   })
+  @IsArray()
+  @IsOptional()
   genres: Genre[];
 
   @ApiProperty({
@@ -117,5 +162,7 @@ export default class EditAnimeDto {
     nullable: true,
     required: false,
   })
+  @IsString()
+  @IsOptional()
   description?: string;
 }

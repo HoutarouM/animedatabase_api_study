@@ -54,7 +54,6 @@ export class AnimeController {
     return await this.animeService.updateAnimeData(id, editAnimeDto);
   }
 
-  // TODO: refactor filename
   @Put(':id/upload/poster')
   @UseInterceptors(FileInterceptor('file', posterSettings))
   async uploadAnimePoster(
