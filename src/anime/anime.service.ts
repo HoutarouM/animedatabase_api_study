@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Like, Repository } from 'typeorm';
 
 // entities
 import Anime from './entity/anime.entity';
@@ -33,6 +33,22 @@ export class AnimeService {
   }
 
   /**
+   * It returns an array of Anime objects that have a title that contains the name parameter
+   * @param {string} name - string - The name of the anime you want to search for.
+   * @returns An array of Anime objects
+   */
+  async findByName(name: string): Promise<Anime[]> {
+    try {
+      return await this.animeRepository.find({
+        where: [{ title: Like('%' + name + '%') }],
+        relations: ['type', 'producers', 'licensors', 'studios', 'genres'],
+      });
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  /**
    * It finds an anime by id
    * @param {number} id - number - The id of the anime we want to find.
    * @returns The anime with the id that was passed in.
@@ -41,6 +57,7 @@ export class AnimeService {
     try {
       return await this.animeRepository.findOneOrFail({
         where: { id },
+        relations: ['type', 'producers', 'licensors', 'studios', 'genres'],
       });
     } catch (err) {
       throw err;

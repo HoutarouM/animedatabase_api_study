@@ -3,6 +3,8 @@ import {
   Controller,
   Delete,
   Get,
+  HttpException,
+  HttpStatus,
   Param,
   ParseIntPipe,
   Post,
@@ -34,6 +36,21 @@ export class AnimeController {
   @Get()
   async findAll(): Promise<Anime[]> {
     return await this.animeService.findAll();
+  }
+
+  @Get(':name')
+  async findByName(@Param('name') name: string): Promise<Anime[]> {
+    if (name.length < 4) {
+      throw new HttpException(
+        {
+          status: HttpStatus.BAD_REQUEST,
+          error: 'Name must be at least 4 characters long.',
+        },
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
+    return await this.animeService.findByName(name);
   }
 
   @Get(':id')
