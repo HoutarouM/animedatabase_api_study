@@ -2,7 +2,7 @@
 export const animeData = [
   {
     id: 1,
-    title: 'title',
+    title: 'first anime title',
     alternative_title: null,
     japanese_title: 'title',
     poster_path: '/posters/1.jpg',

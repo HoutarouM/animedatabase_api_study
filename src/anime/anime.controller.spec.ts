@@ -1,4 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { HttpException } from '@nestjs/common';
 
 // controllers
 import { AnimeController } from './anime.controller';
@@ -48,7 +49,7 @@ describe('AnimeController', () => {
 
   describe('find data', () => {
     it('should return an array of anime objects', async () => {
-      // expect that animeController finds all return anime data
+      // expect that animeController return all found anime objects
       expect(await animeController.findAll()).toEqual(animeData);
 
       // expect that mock service will be called
@@ -56,14 +57,30 @@ describe('AnimeController', () => {
     });
 
     it('should return an anime object by provided id', async () => {
-      // expect that anime controller find by id return anime data item id as index
+      // expect that anime controller find by id and return anime data item id as index
       expect(await animeController.findById(0)).toEqual(animeData[0]);
 
       // expect that anime service will be called with 0 as id
       expect(mockAnimeService.findById).toHaveBeenCalledWith(0);
     });
 
-    // TODO: test find by name
+    // find by name tests
+    it('should return an anime object by provided name', async () => {
+      // expect that anime controller find by name and return anime object
+      expect(await animeController.findByName('first')).toEqual(animeData[0]);
+
+      // expect that anime service will be called with first as name
+      expect(mockAnimeService.findByName).toHaveBeenCalledWith('first');
+    });
+
+    it('should return an error because the name of anime must be at least four character', async () => {
+      // expect that anime controller will return an http exception
+      try {
+        await animeController.findByName('l');
+      } catch (err) {
+        expect(err).toBeInstanceOf(HttpException);
+      }
+    });
   });
 
   describe('add(create) anime', () => {

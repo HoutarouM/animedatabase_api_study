@@ -6,6 +6,14 @@ export const mockAnimeService = {
     return animeData;
   }),
 
+  findByName: jest.fn().mockImplementation((name: string) => {
+    return animeData.find(
+      (anime) =>
+        typeof anime.title.search(name) !== null ||
+        typeof anime.title.search(name) !== undefined,
+    );
+  }),
+
   findById: jest.fn().mockImplementation((id: number) => {
     return animeData[id];
   }),
